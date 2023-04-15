@@ -1,20 +1,33 @@
-import { View, Text, Image, ImageBackground } from 'react-native'
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TouchableHighlight
+} from 'react-native'
 import React from 'react'
 import { StyleSheet } from 'react-native'
 import { getStyleType } from '../pokemonUtils'
 
 const background = require('../assets/pokemon-bg.jpg')
 
-export default function PokemonDetails ({ route }) {
-
+export default function PokemonDetails ({ navigation, route }) {
   const { pokemon } = route.params
-  console.log(pokemon);
+  console.log(pokemon)
   return (
     <ImageBackground
       source={background}
       resizeMode='cover'
       style={styles.image}
     >
+      <TouchableHighlight
+        onPress={() => navigation.goBack()}
+        style={[styles.addButtonContainer, styles.backButtonContainer]}
+      >
+        <View style={styles.addButton}>
+          <Text style={styles.plusIcon}>{'<'}</Text>
+        </View>
+      </TouchableHighlight>
       <Image
         style={styles.sprite}
         source={{
@@ -89,7 +102,7 @@ const styles = StyleSheet.create({
   },
   addButtonContainer: {
     position: 'fixed',
-    bottom: 30,
+    bottom: 70,
     backgroundColor: 'rgb(65,133,148)',
     borderRadius: '100%',
     width: 45,
@@ -109,5 +122,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 4,
     color: 'rgb(162,231,195)'
+  },
+  backButtonContainer: {
+    top: 10,
+    left: 10
   }
 })

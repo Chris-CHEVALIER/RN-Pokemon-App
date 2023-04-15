@@ -30,7 +30,11 @@ export default function HomeStackScreen () {
   }, [])
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
       <Stack.Screen name='PokemonList'>
         {props => <PokemonList {...props} pokemons={pokemons} />}
       </Stack.Screen>
