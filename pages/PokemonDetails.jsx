@@ -6,8 +6,9 @@ import { getStyleType } from '../pokemonUtils'
 const background = require('../assets/pokemon-bg.jpg')
 
 export default function PokemonDetails ({ route }) {
+
   const { pokemon } = route.params
-  console.log(pokemon)
+  console.log(pokemon);
   return (
     <ImageBackground
       source={background}
@@ -32,6 +33,11 @@ export default function PokemonDetails ({ route }) {
               {type.type.name}
             </Text>
           ))}
+        </View>
+        <View style={styles.addButtonContainer}>
+          <View style={styles.addButton}>
+            <Text style={styles.plusIcon}>+</Text>
+          </View>
         </View>
       </View>
     </ImageBackground>
@@ -80,5 +86,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     backgroundImage: 'linear-gradient(#ddd, #bbb)',
     margin: 5
+  },
+  addButtonContainer: {
+    position: 'fixed',
+    bottom: 30,
+    backgroundColor: 'rgb(65,133,148)',
+    borderRadius: '100%',
+    width: 45,
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  addButton: {
+    alignItems: 'center',
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    borderRadius: '100%',
+    border: '1px solid rgb(162,231,195)'
+  },
+  plusIcon: {
+    fontSize: 25,
+    marginBottom: 4,
+    color: 'rgb(162,231,195)'
   }
 })

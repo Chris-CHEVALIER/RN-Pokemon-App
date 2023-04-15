@@ -1,19 +1,23 @@
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-
 // My pages
-import PokemonList from './pages/PokemonList'
-import PokemonDetails from './pages/PokemonDetails';
+import PokemonTeams from './pages/PokemonTeams'
 
-const Stack = createNativeStackNavigator();
+// Navigation
+import { NavigationContainer } from '@react-navigation/native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import HomeStackScreen from './pages/HomeStackScreen'
+
+const Tab = createBottomTabNavigator()
 
 export default function App () {
+  
+
   return (
-    <NavigationContainer initialRouteName="PokemonList">
-      <Stack.Navigator>
-        <Stack.Screen name='PokemonList' component={PokemonList} />
-        <Stack.Screen name='PokemonDetails' component={PokemonDetails} />
-      </Stack.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name='Home' component={HomeStackScreen} />
+
+        <Tab.Screen name='PokemonTeams' component={PokemonTeams} />
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }
