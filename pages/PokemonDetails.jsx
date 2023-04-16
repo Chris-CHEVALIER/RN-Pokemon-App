@@ -3,17 +3,42 @@ import {
   Text,
   Image,
   ImageBackground,
-  TouchableHighlight
+  TouchableHighlight,
+  ToastAndroid
 } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { getStyleType } from '../pokemonUtils'
+import PokemonTeams from './PokemonTeams'
+import { Modal } from 'react-native-paper'
+import { updateTeam } from '../Fire'
 
 const background = require('../assets/pokemon-bg.jpg')
 
 export default function PokemonDetails ({ navigation, route }) {
-  const { pokemon } = route.params
-  console.log(pokemon)
+  const [modalVisible, setModalVisible] = useState(false)
+  const { pokemon, team } = route.params
+  const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon.id}`
+
+  function addPokemonToTeam (team) {
+    if (
+      team.pokemons.length < 6 &&
+      !team.pokemons.find(p => p === pokemonUrl)
+    ) {
+      team.pokemons.push(pokemonUrl)
+      updateTeam(team)
+      ToastAndroid.show(
+        `${pokemon.name} a été ajouté à l'équipe "${team.name}".`,
+        ToastAndroid.SHORT
+      )
+    } else {
+      ToastAndroid.show(
+        `${pokemon.name} ne peut pas être ajouté à l'équipe "${team.name}".`,
+        ToastAndroid.SHORT
+      )
+    }
+  }
+
   return (
     <ImageBackground
       source={background}
@@ -47,12 +72,26 @@ export default function PokemonDetails ({ navigation, route }) {
             </Text>
           ))}
         </View>
-        <View style={styles.addButtonContainer}>
+
+        <TouchableHighlight
+          onPress={() => setModalVisible(true)}
+          style={styles.addButtonContainer}
+        >
           <View style={styles.addButton}>
-            <Text style={styles.plusIcon}>+</Text>
+            <Text style={styles.plusIcon}>
+              {team && team.pokemons.find(p => p === pokemonUrl) ? '-' : '+'}
+            </Text>
           </View>
-        </View>
+        </TouchableHighlight>
       </View>
+
+      <Modal
+        visible={modalVisible}
+        onDismiss={() => setModalVisible(!modalVisible)}
+        contentContainerStyle={styles.modal}
+      >
+        <PokemonTeams onPress={team => addPokemonToTeam(team)} />
+      </Modal>
     </ImageBackground>
   )
 }
@@ -126,5 +165,9 @@ const styles = StyleSheet.create({
   backButtonContainer: {
     top: 10,
     left: 10
+  },
+  modal: {
+    backgroundColor: 'white',
+    padding: 20
   }
 })

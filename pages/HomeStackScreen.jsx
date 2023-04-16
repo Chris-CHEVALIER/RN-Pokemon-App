@@ -6,6 +6,7 @@ import PokemonList from './PokemonList'
 
 // Navigation
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import TeamDetails from './TeamDetails'
 const Stack = createNativeStackNavigator()
 
 // Data
@@ -39,6 +40,7 @@ export default function HomeStackScreen () {
         {props => <PokemonList {...props} pokemons={pokemons} />}
       </Stack.Screen>
       <Stack.Screen name='PokemonDetails' component={PokemonDetails} />
+      <Stack.Screen name='TeamDetails' component={TeamDetails} />
     </Stack.Navigator>
   )
 }

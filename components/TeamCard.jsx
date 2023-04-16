@@ -1,6 +1,6 @@
-import { Card } from '@rneui/base'
 import React, { useEffect, useState } from 'react'
 import { View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native'
+import { Card } from '@rneui/base'
 
 export default function TeamCard ({ team, onPress }) {
   const [pokemons, setPokemons] = useState([])

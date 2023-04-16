@@ -1,10 +1,10 @@
-import { View, FlatList, StyleSheet, ScrollView } from 'react-native'
+import { FlatList, StyleSheet, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getTeams } from '../Fire'
 import TeamCard from '../components/TeamCard'
 import { LinearGradient } from 'expo-linear-gradient'
 
-export default function PokemonTeams () {
+export default function PokemonTeams ({ navigation, onPress }) {
   const [teams, setTeams] = useState([])
 
   useEffect(() => {
@@ -23,7 +23,11 @@ export default function PokemonTeams () {
         data={teams}
         renderItem={({ item }) => (
           <TeamCard
-            onPress={() => navigation.push('TeamDetails', { team: item })}
+            onPress={() => {
+              onPress
+                ? onPress(item)
+                : navigation.navigate('TeamDetails', { team: item })
+            }}
             team={item}
           />
         )}

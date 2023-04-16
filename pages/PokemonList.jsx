@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, FlatList, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import PokemonCard from '../components/PokemonCard'
 
@@ -16,7 +16,7 @@ export default function PokemonList ({ pokemons, navigation }) {
           renderItem={({ item }) => (
             <PokemonCard
               onPress={() =>
-                navigation.push('PokemonDetails', { pokemon: item })
+                navigation.push('PokemonDetails', { pokemon: item, team: null })
               }
               pokemonDetails={item}
             />
