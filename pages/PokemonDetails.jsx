@@ -39,6 +39,23 @@ export default function PokemonDetails ({ navigation, route }) {
     }
   }
 
+  function removePokemonFromTeam () {
+    /* let pokemonToRemove = team.pokemons.find(p => p === pokemonUrl)
+    ) {
+      team.pokemons.push(pokemonUrl)
+      updateTeam(team)
+      ToastAndroid.show(
+        `${pokemon.name} a été retiré de l'équipe "${team.name}".`,
+        ToastAndroid.SHORT
+      )
+    } else {
+      ToastAndroid.show(
+        `${pokemon.name} ne peut pas être ajouté à l'équipe "${team.name}".`,
+        ToastAndroid.SHORT
+      )
+    } */
+  }
+
   return (
     <ImageBackground
       source={background}
@@ -74,7 +91,11 @@ export default function PokemonDetails ({ navigation, route }) {
         </View>
 
         <TouchableHighlight
-          onPress={() => setModalVisible(true)}
+          onPress={() =>
+            team && team.pokemons.find(p => p === pokemonUrl)
+              ? removePokemonfromTeam()
+              : setModalVisible(true)
+          }
           style={styles.addButtonContainer}
         >
           <View style={styles.addButton}>

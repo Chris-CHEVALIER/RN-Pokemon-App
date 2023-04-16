@@ -9,8 +9,7 @@ export default function PokemonCard ({ pokemonDetails, onPress }) {
         <Image
           style={styles.sprite}
           source={{
-            uri: pokemonDetails.sprites.versions['generation-v']['black-white']
-              .animated.front_default
+            uri: pokemonDetails.sprites.other['official-artwork'].front_default
           }}
         />
         <Text style={styles.pokemonName}>{pokemonDetails.name}</Text>

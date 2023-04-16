@@ -39,9 +39,9 @@ export const getStyleType = type => {
       break
     case 'ground':
       typeStyle = {
-        backgroundColor: '#ad9551',
-        backgroundImage: "linear-gradient('#78c850', '#5ca935')",
-
+        backgroundColor: '#927D44',
+        backgroundImage: "linear-gradient('#E0C068', '#5ca935')",
+        borderColor: '#927D44'
       }
       break
     case 'rock':
@@ -80,9 +80,9 @@ export const getStyleType = type => {
       break
     case 'dark':
       typeStyle = {
-        backgroundColor: '#78c850',
-        backgroundImage: "linear-gradient('#78c850', '#5ca935')",
-        borderColor: '#4a892b'
+        backgroundColor: '#705848',
+        backgroundImage: "linear-gradient('#705848', '#49392F')",
+        borderColor: '#49392F'
       }
       break
     case 'dragon':
@@ -108,8 +108,9 @@ export const getStyleType = type => {
       break
     case 'fairy':
       typeStyle = {
-        backgroundColor: '#d044d0',
-        backgroundImage: "linear-gradient('#78c850', '#5ca935')",
+        backgroundColor: '#9B6470',
+        backgroundImage: "linear-gradient('#78c850', '#9B6470')",
+        borderColor: '#9B6470'
       }
       break
     case 'fighting':
