@@ -6,7 +6,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeStackScreen from './pages/HomeStackScreen'
 import { Image } from 'react-native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 const Tab = createBottomTabNavigator()
 
@@ -19,9 +18,6 @@ export default function App () {
           tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
           tabBarStyle: { marginBottom: 5 }
         }}
-        /* tabBarOptions={{
-          activeTintColor: 'rgb(65,133,148)'
-        }} */
       >
         <Tab.Screen
           name='Home'

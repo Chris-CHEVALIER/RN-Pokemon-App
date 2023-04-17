@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    border: '8px solid rgb(183, 233, 166)'
+    borderWidth: 8,
+    borderColor: 'rgb(183, 233, 166)'
   },
   background: {
     position: 'absolute',
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
   },
   trainerName: {
     backgroundColor: 'rgb(65,133,148)',
-    /* borderRadius: 25, */
+    borderRadius: 25,
     width: 120,
     margin: 'auto',
     padding: 5,

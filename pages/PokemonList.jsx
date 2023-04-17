@@ -3,9 +3,9 @@ import {
   View,
   FlatList,
   StyleSheet,
-  TouchableHighlight,
   Text,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import PokemonCard from '../components/PokemonCard'
@@ -27,53 +27,62 @@ export default function PokemonList ({
         style={styles.background}
       />
       <View style={styles.container}>
-        {loading && <ActivityIndicator size={30} />}
-        <FlatList
-          data={pokemons}
-          renderItem={({ item }) => (
-            <PokemonCard
-              onPress={() =>
-                navigation.push('PokemonDetails', { pokemon: item, team: null })
-              }
-              pokemonDetails={item}
-            />
-          )}
-          keyExtractor={item => item.id}
-          numColumns={3}
-          style={styles.pokemonContainer}
-          columnWrapperStyle={styles.listWrapper}
-          contentContainerStyle={styles.pokemonList}
-        />
-
-        <View style={styles.generationContainer}>
-          <Text style={styles.generationTitle}>GENERATION</Text>
-          <View style={styles.generationSelector}>
-            {generationNumbers.map(generationNumber => (
-              <TouchableHighlight
-                style={[
-                  styles.generationNumber,
-                  selectedGeneration === generationNumber && {
-                    border: '1px solid white'
+        {loading ? (
+          <ActivityIndicator style={styles.loadingIndicator} />
+        ) : (
+          <>
+            <FlatList
+              data={pokemons}
+              renderItem={({ item }) => (
+                <PokemonCard
+                  onPress={() =>
+                    navigation.push('PokemonDetails', {
+                      pokemon: item,
+                      team: null
+                    })
                   }
-                ]}
-                key={generationNumber}
-                onPress={() => onGenerationChange(generationNumber - 1)}
-              >
-                <Text
-                  style={[
-                    styles.generationText,
-                    selectedGeneration === generationNumber && {
-                      color: 'white',
-                      fontWeight: 'bold'
-                    }
-                  ]}
-                >
-                  {generationNumber}
-                </Text>
-              </TouchableHighlight>
-            ))}
-          </View>
-        </View>
+                  pokemonDetails={item}
+                />
+              )}
+              keyExtractor={item => item.id}
+              numColumns={3}
+              style={styles.pokemonContainer}
+              columnWrapperStyle={styles.listWrapper}
+              contentContainerStyle={styles.pokemonList}
+            />
+
+            <View style={styles.generationContainer}>
+              <Text style={styles.generationTitle}>GENERATION</Text>
+              <View style={styles.generationSelector}>
+                {generationNumbers.map(generationNumber => (
+                  <TouchableOpacity
+                    style={[
+                      styles.generationNumber,
+                      selectedGeneration === generationNumber && {
+                        borderWidth: 1,
+                        borderColor: 'white'
+                      }
+                    ]}
+                    key={generationNumber}
+                    onPress={() => onGenerationChange(generationNumber - 1)}
+                  >
+                    <Text
+                      style={[
+                        styles.generationText,
+                        selectedGeneration === generationNumber && {
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }
+                      ]}
+                    >
+                      {generationNumber}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            </View>
+          </>
+        )}
       </View>
     </>
   )
@@ -84,7 +93,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     marginTop: 25,
-    border: '8px solid rgb(183, 233, 166)'
+    borderWidth: 8,
+    borderColor: 'rgb(183, 233, 166)'
   },
   background: {
     position: 'absolute',
@@ -92,6 +102,9 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: Dimensions.get('window').height
+  },
+  loadingIndicator: {
+    marginTop: 10
   },
   listWrapper: {
     marginVertical: 10,
@@ -105,8 +118,8 @@ const styles = StyleSheet.create({
     bottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    left: '5%',
-    width: '90%'
+    left: '1%',
+    width: '98%'
   },
   generationTitle: {
     color: 'rgb(162,231,195)',
@@ -123,8 +136,9 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     justifyContent: 'center',
-    /* borderRadius: '100%', */
-    border: '1px solid rgb(162,231,195)'
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: 'rgb(162,231,195)'
   },
   generationText: {
     fontSize: 16,

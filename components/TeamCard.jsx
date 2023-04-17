@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native'
-import { Card } from '@rneui/base'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 
 export default function TeamCard ({ team, onPress }) {
   const [pokemons, setPokemons] = useState([])
@@ -15,7 +14,7 @@ export default function TeamCard ({ team, onPress }) {
   }, [])
 
   return (
-    <TouchableHighlight style={styles.teamCard} onPress={onPress}>
+    <TouchableOpacity style={styles.teamCard} onPress={onPress}>
       <View style={styles.inline}>
         <View style={{ width: '60%', marginLeft: 25 }}>
           <Text style={styles.teamName}>{team.name}</Text>
@@ -30,7 +29,7 @@ export default function TeamCard ({ team, onPress }) {
           />
         )}
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 }
 
@@ -41,17 +40,17 @@ const styles = StyleSheet.create({
     width: '90%',
     marginHorizontal: 'auto',
     marginVertical: 10,
-    /* borderRadius: 10 */
+    borderRadius: 10
   },
   inline: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   sprite: {
     width: '45%',
     height: 90,
-    resizeMode: 'cover',
+    resizeMode: 'cover'
   },
   teamName: {
     fontSize: 22,

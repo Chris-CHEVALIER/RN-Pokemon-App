@@ -3,8 +3,9 @@ import {
   Text,
   Image,
   ImageBackground,
-  TouchableHighlight,
-  ToastAndroid
+  ToastAndroid,
+  TouchableOpacity,
+  Dimensions
 } from 'react-native'
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
@@ -62,16 +63,15 @@ export default function PokemonDetails ({ navigation, route }) {
       source={typeImages[pokemon.types[0].type.name]}
       resizeMode='cover'
       style={styles.image}
-      /* blurRadius={2} */
     >
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={[styles.addButtonContainer, styles.backButtonContainer]}
       >
         <View style={styles.addButton}>
           <Text style={styles.plusIcon}>{'<'}</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
       <Image
         style={styles.sprite}
         source={{
@@ -91,7 +91,7 @@ export default function PokemonDetails ({ navigation, route }) {
           ))}
         </View>
 
-        <TouchableHighlight
+        <TouchableOpacity
           onPress={() =>
             team && team.pokemons.find(p => p === pokemonUrl)
               ? removePokemonfromTeam()
@@ -104,15 +104,16 @@ export default function PokemonDetails ({ navigation, route }) {
               {team && team.pokemons.find(p => p === pokemonUrl) ? '-' : '+'}
             </Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </View>
 
       <Modal
         visible={modalVisible}
         onDismiss={() => setModalVisible(!modalVisible)}
         contentContainerStyle={styles.modal}
+        
       >
-        <PokemonTeams onPress={team => addPokemonToTeam(team)} />
+        <PokemonTeams onClose={() => setModalVisible(false)} onPress={team => addPokemonToTeam(team)} />
       </Modal>
     </ImageBackground>
   )
@@ -121,22 +122,23 @@ export default function PokemonDetails ({ navigation, route }) {
 const styles = StyleSheet.create({
   image: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    paddingTop: 25
   },
   sprite: {
     width: 220,
     height: 200,
+    zIndex: 1,
     marginTop: 10
   },
   informationsContainer: {
     backgroundColor: 'white',
     width: '96%',
     margin: 'auto',
-    height: 600,
+    height: Dimensions.get('window').height - 180,
     marginTop: -20,
-    zIndex: -1,
     paddingTop: 20,
-    /* borderRadius: 20, */
+    borderRadius: 20,
     alignItems: 'center'
   },
   pokemonName: {
@@ -146,26 +148,27 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     color: 'rgb(61, 61, 61)'
   },
+  container: {
+    flexDirection: 'row'
+  },
   typeIcon: {
-    /* fontFamily: 'Fira Sans, sans-serif', */
     paddingVertical: 3,
     textAlign: 'center',
-    /* textShadow: '1px 1px 1px #333', */
     width: 53,
-    /* border: '1px solid #aaa', */
-    /* borderRadius: 2, */
+    borderWidth: 1,
+    borderColor: '#aaa',
+    borderRadius: 2,
     color: '#fff',
     fontSize: 10,
     textTransform: 'uppercase',
     backgroundColor: '#ccc',
-    /* backgroundImage: 'linear-gradient(#ddd, #bbb)', */
     margin: 5
   },
   addButtonContainer: {
-    /* position: 'fixed', */
+    position: 'absolute',
     bottom: 70,
     backgroundColor: 'rgb(65,133,148)',
-    /* borderRadius: '100%', */
+    borderRadius: 100,
     width: 45,
     height: 45,
     alignItems: 'center',
@@ -176,8 +179,9 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     justifyContent: 'center',
-    /* borderRadius: '100%', */
-    border: '1px solid rgb(162,231,195)'
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: 'rgb(162,231,195)'
   },
   plusIcon: {
     fontSize: 25,
@@ -185,8 +189,8 @@ const styles = StyleSheet.create({
     color: 'rgb(162,231,195)'
   },
   backButtonContainer: {
-    top: 10,
-    left: 10
+    top: 30,
+    left: 15
   },
   modal: {
     backgroundColor: 'white',

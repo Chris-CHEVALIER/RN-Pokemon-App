@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import { getStyleType } from '../pokemonUtils'
 
 export default function PokemonCard ({ pokemonDetails, onPress }) {
   return (
-    <TouchableHighlight onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.centered}>
         <Image
           style={styles.sprite}
@@ -24,7 +24,7 @@ export default function PokemonCard ({ pokemonDetails, onPress }) {
           ))}
         </View>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 }
 
@@ -54,8 +54,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     /* textShadow: '1px 1px 1px #333', */
     width: 43,
-    /* border: '1px solid #aaa', */
-    /* borderRadius: 2, */
+    borderWidth: 1,
+    borderColor: '#aaa',
+    borderRadius: 2,
     color: '#fff',
     fontSize: 8,
     textTransform: 'uppercase',
