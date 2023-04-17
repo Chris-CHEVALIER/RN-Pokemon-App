@@ -84,25 +84,26 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    border: '8px solid rgb(183, 233, 166)'
+    border: '8px solid rgb(183, 233, 166)',
+    paddingBottom: 70
   },
-  background: {
+  /* background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     height: '100vh'
-  },
+  }, */
   listWrapper: {
     marginVertical: 10,
     justifyContent: 'space-around'
   },
   generationContainer: {
     backgroundColor: 'rgb(65,133,148)',
-    borderRadius: 30,
+    /* borderRadius: 30, */
     paddingVertical: 6,
     paddingHorizontal: 25,
-    position: 'fixed',
+    /* position: 'fixed', */
     bottom: 70,
     alignItems: 'center',
     justifyContent: 'center',
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     width: 25,
     height: 25,
     justifyContent: 'center',
-    borderRadius: '100%',
+    /* borderRadius: '100%', */
     border: '1px solid rgb(162,231,195)'
   },
   generationText: {

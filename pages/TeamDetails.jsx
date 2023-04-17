@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     width: '100%',
     border: '8px solid rgb(183, 233, 166)'
   },
-  background: {
+  /* background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
     height: '100vh'
-  },
+  }, */
   listWrapper: {
     marginVertical: 10,
     justifyContent: 'space-around'
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
   trainerName: {
     backgroundColor: 'rgb(65,133,148)',
-    borderRadius: 25,
+    /* borderRadius: 25, */
     width: 120,
     margin: 'auto',
     padding: 5,

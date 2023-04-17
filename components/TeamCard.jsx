@@ -15,58 +15,51 @@ export default function TeamCard ({ team, onPress }) {
   }, [])
 
   return (
-    <>
-      <TouchableHighlight onPress={onPress}>
-        <View style={styles.centered}>
-          {pokemons.length > 0 && (
-            <Image
-              style={styles.sprite}
-              source={{
-                uri: pokemons[0].sprites.other['official-artwork'].front_default
-              }}
-            />
-          )}
-
-          <Text style={styles.trainerName}>{team.trainer}</Text>
-
+    <TouchableHighlight style={styles.teamCard} onPress={onPress}>
+      <View style={styles.inline}>
+        <View style={{ width: '60%', marginLeft: 25 }}>
           <Text style={styles.teamName}>{team.name}</Text>
+          <Text style={styles.trainerName}>{team.trainer}</Text>
         </View>
-      </TouchableHighlight>
-      <Card.Divider />
-    </>
+        {pokemons.length > 0 && (
+          <Image
+            style={styles.sprite}
+            source={{
+              uri: pokemons[0].sprites.other['official-artwork'].front_default
+            }}
+          />
+        )}
+      </View>
+    </TouchableHighlight>
   )
 }
 
 const styles = StyleSheet.create({
-  centered: {
-    position: 'relative',
+  teamCard: {
+    backgroundColor: 'white',
+    boxShadow: 'rgba(17, 12, 46, 0.15) 0px 6px 10px 0px',
+    width: '90%',
+    marginHorizontal: 'auto',
+    marginVertical: 10,
+    /* borderRadius: 10 */
+  },
+  inline: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 10
   },
   sprite: {
-    width: 100,
-    height: 100,
+    width: '45%',
+    height: 90,
     resizeMode: 'cover',
-    marginBottom: 10,
-    borderRadius: '100%',
-    zIndex: -1,
-    border: '7px solid rgb(162,231,195)'
-  },
-  trainerName: {
-    backgroundColor: 'rgb(65,133,148)',
-    borderRadius: 25,
-    width: 120,
-    marginTop: -30,
-    padding: 5,
-    textAlign: 'center',
-    fontWeight: 'bold',
-    color: 'rgb(162,231,195)'
   },
   teamName: {
-    fontSize: 14,
-    marginTop: 5,
-    textAlign: 'center',
+    fontSize: 22,
     textTransform: 'capitalize',
     fontWeight: 'bold'
+  },
+  trainerName: {
+    fontSize: 14,
+    textTransform: 'capitalize'
   }
 })

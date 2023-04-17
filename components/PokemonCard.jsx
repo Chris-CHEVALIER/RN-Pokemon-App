@@ -30,7 +30,7 @@ export default function PokemonCard ({ pokemonDetails, onPress }) {
 
 const styles = StyleSheet.create({
   centered: {
-    position: 'relative',
+    /* position: 'relative', */
     alignItems: 'center'
   },
   container: {
@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   typeIcon: {
-    fontFamily: 'Fira Sans, sans-serif',
+    /* fontFamily: 'Fira Sans, sans-serif', */
     paddingVertical: 3,
     textAlign: 'center',
     textShadow: '1px 1px 1px #333',
     width: 43,
     border: '1px solid #aaa',
-    borderRadius: 2,
+    /* borderRadius: 2, */
     color: '#fff',
     fontSize: 8,
     textTransform: 'uppercase',

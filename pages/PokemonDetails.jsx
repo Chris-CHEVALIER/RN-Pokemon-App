@@ -39,10 +39,14 @@ export default function PokemonDetails ({ navigation, route }) {
     }
   }
 
-  function removePokemonFromTeam () {
-    /* let pokemonToRemove = team.pokemons.find(p => p === pokemonUrl)
-    ) {
-      team.pokemons.push(pokemonUrl)
+  function removePokemonfromTeam () {
+    let pokemonToRemove = team.pokemons.find(p => p === pokemonUrl)
+    console.log(pokemonToRemove)
+    if (pokemonToRemove) {
+      const pokemonIndex = team.pokemons.indexOf(pokemonToRemove)
+      if (pokemonIndex >= 0) {
+        team.pokemons.splice(pokemonIndex, 1)
+      }
       updateTeam(team)
       ToastAndroid.show(
         `${pokemon.name} a été retiré de l'équipe "${team.name}".`,
@@ -50,10 +54,10 @@ export default function PokemonDetails ({ navigation, route }) {
       )
     } else {
       ToastAndroid.show(
-        `${pokemon.name} ne peut pas être ajouté à l'équipe "${team.name}".`,
+        `${pokemon.name} ne peut pas être retiré de l'équipe "${team.name}".`,
         ToastAndroid.SHORT
       )
-    } */
+    }
   }
 
   return (
@@ -135,7 +139,7 @@ const styles = StyleSheet.create({
     marginTop: -20,
     zIndex: -1,
     paddingTop: 20,
-    borderRadius: 20,
+    /* borderRadius: 20, */
     alignItems: 'center'
   },
   pokemonName: {
@@ -146,13 +150,13 @@ const styles = StyleSheet.create({
     color: 'rgb(61, 61, 61)'
   },
   typeIcon: {
-    fontFamily: 'Fira Sans, sans-serif',
+    /* fontFamily: 'Fira Sans, sans-serif', */
     paddingVertical: 3,
     textAlign: 'center',
     textShadow: '1px 1px 1px #333',
     width: 53,
     border: '1px solid #aaa',
-    borderRadius: 2,
+    /* borderRadius: 2, */
     color: '#fff',
     fontSize: 10,
     textTransform: 'uppercase',
@@ -161,10 +165,10 @@ const styles = StyleSheet.create({
     margin: 5
   },
   addButtonContainer: {
-    position: 'fixed',
+    /* position: 'fixed', */
     bottom: 70,
     backgroundColor: 'rgb(65,133,148)',
-    borderRadius: '100%',
+    /* borderRadius: '100%', */
     width: 45,
     height: 45,
     alignItems: 'center',
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
     width: 35,
     height: 35,
     justifyContent: 'center',
-    borderRadius: '100%',
+    /* borderRadius: '100%', */
     border: '1px solid rgb(162,231,195)'
   },
   plusIcon: {
