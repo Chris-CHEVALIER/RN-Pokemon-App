@@ -4,7 +4,8 @@ import {
   FlatList,
   StyleSheet,
   TouchableHighlight,
-  Text
+  Text,
+  Dimensions
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import PokemonCard from '../components/PokemonCard'
@@ -81,30 +82,27 @@ export default function PokemonList ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    display: 'flex',
     flexDirection: 'column',
-    width: '100%',
-    border: '8px solid rgb(183, 233, 166)',
-    paddingBottom: 70
+    marginTop: 25,
+    border: '8px solid rgb(183, 233, 166)'
   },
-  /* background: {
+  background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: '100vh'
-  }, */
+    height: Dimensions.get('window').height
+  },
   listWrapper: {
     marginVertical: 10,
     justifyContent: 'space-around'
   },
   generationContainer: {
     backgroundColor: 'rgb(65,133,148)',
-    /* borderRadius: 30, */
+    borderRadius: 20,
     paddingVertical: 6,
     paddingHorizontal: 25,
-    /* position: 'fixed', */
-    bottom: 70,
+    bottom: 20,
     alignItems: 'center',
     justifyContent: 'center',
     left: '5%',

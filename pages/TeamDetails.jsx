@@ -1,4 +1,4 @@
-import { View, FlatList, StyleSheet, Text } from 'react-native'
+import { View, FlatList, StyleSheet, Text, Dimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PokemonCard from '../components/PokemonCard'
 
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
     width: '100%',
     border: '8px solid rgb(183, 233, 166)'
   },
-  /* background: {
+  background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: '100vh'
-  }, */
+    height: Dimensions.get('window').height
+  },
   listWrapper: {
     marginVertical: 10,
     justifyContent: 'space-around'

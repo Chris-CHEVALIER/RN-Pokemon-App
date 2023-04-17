@@ -8,12 +8,10 @@ import {
 } from 'react-native'
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { getStyleType } from '../pokemonUtils'
+import { getStyleType, typeImages } from '../pokemonUtils'
 import PokemonTeams from './PokemonTeams'
 import { Modal } from 'react-native-paper'
 import { updateTeam } from '../Fire'
-
-const background = require('../assets/pokemon-bg.jpg')
 
 export default function PokemonDetails ({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false)
@@ -41,7 +39,6 @@ export default function PokemonDetails ({ navigation, route }) {
 
   function removePokemonfromTeam () {
     let pokemonToRemove = team.pokemons.find(p => p === pokemonUrl)
-    console.log(pokemonToRemove)
     if (pokemonToRemove) {
       const pokemonIndex = team.pokemons.indexOf(pokemonToRemove)
       if (pokemonIndex >= 0) {
@@ -62,9 +59,10 @@ export default function PokemonDetails ({ navigation, route }) {
 
   return (
     <ImageBackground
-      source={background}
+      source={typeImages[pokemon.types[0].type.name]}
       resizeMode='cover'
       style={styles.image}
+      /* blurRadius={2} */
     >
       <TouchableHighlight
         onPress={() => navigation.goBack()}
@@ -80,7 +78,6 @@ export default function PokemonDetails ({ navigation, route }) {
           uri: pokemon.sprites.other['official-artwork'].front_default
         }}
       />
-
       <View style={styles.informationsContainer}>
         <Text style={styles.pokemonName}>{pokemon.name}</Text>
         <View style={styles.container}>
@@ -153,15 +150,15 @@ const styles = StyleSheet.create({
     /* fontFamily: 'Fira Sans, sans-serif', */
     paddingVertical: 3,
     textAlign: 'center',
-    textShadow: '1px 1px 1px #333',
+    /* textShadow: '1px 1px 1px #333', */
     width: 53,
-    border: '1px solid #aaa',
+    /* border: '1px solid #aaa', */
     /* borderRadius: 2, */
     color: '#fff',
     fontSize: 10,
     textTransform: 'uppercase',
     backgroundColor: '#ccc',
-    backgroundImage: 'linear-gradient(#ddd, #bbb)',
+    /* backgroundImage: 'linear-gradient(#ddd, #bbb)', */
     margin: 5
   },
   addButtonContainer: {

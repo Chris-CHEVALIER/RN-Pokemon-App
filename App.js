@@ -19,9 +19,9 @@ export default function App () {
           tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
           tabBarStyle: { marginBottom: 5 }
         }}
-        tabBarOptions={{
+        /* tabBarOptions={{
           activeTintColor: 'rgb(65,133,148)'
-        }}
+        }} */
       >
         <Tab.Screen
           name='Home'

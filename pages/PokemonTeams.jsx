@@ -4,7 +4,8 @@ import {
   ScrollView,
   TouchableHighlight,
   View,
-  Text
+  Text,
+  Dimensions
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getTeams } from '../Fire'
@@ -21,7 +22,7 @@ export default function PokemonTeams ({ navigation, onPress }) {
   }, [])
 
   return (
-    <ScrollView>
+    <View>
       <LinearGradient
         colors={['rgb(245,245,245)', 'rgb(241, 254, 237)']}
         style={styles.background}
@@ -50,18 +51,18 @@ export default function PokemonTeams ({ navigation, onPress }) {
           </View>
         </TouchableHighlight>
       </View>
-    </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
- /*  background: {
+  background: {
     position: 'absolute',
     left: 0,
     right: 0,
     top: 0,
-    height: '100vh'
-  }, */
+    height: Dimensions.get('window').height
+  },
   addButtonContainer: {
     /* position: 'fixed', */
     bottom: 30,

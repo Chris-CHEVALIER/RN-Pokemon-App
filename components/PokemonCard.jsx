@@ -52,15 +52,15 @@ const styles = StyleSheet.create({
     /* fontFamily: 'Fira Sans, sans-serif', */
     paddingVertical: 3,
     textAlign: 'center',
-    textShadow: '1px 1px 1px #333',
+    /* textShadow: '1px 1px 1px #333', */
     width: 43,
-    border: '1px solid #aaa',
+    /* border: '1px solid #aaa', */
     /* borderRadius: 2, */
     color: '#fff',
     fontSize: 8,
     textTransform: 'uppercase',
     backgroundColor: '#ccc',
-    backgroundImage: 'linear-gradient(#ddd, #bbb)',
+    /* backgroundImage: 'linear-gradient(#ddd, #bbb)', */
     margin: 5
   }
 })
