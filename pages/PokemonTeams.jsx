@@ -49,7 +49,9 @@ export default function PokemonTeams ({ navigation, onPress, onClose }) {
       )}
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => (onClose ? onClose() : {})}
+          onPress={() =>
+            onClose ? onClose() : navigation.navigate('TeamForm')
+          }
           style={styles.addButtonContainer}
         >
           <View style={styles.addButton}>
