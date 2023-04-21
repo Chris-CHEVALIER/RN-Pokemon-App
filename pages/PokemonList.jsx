@@ -5,11 +5,11 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
 import PokemonCard from '../components/PokemonCard'
-import { ActivityIndicator } from 'react-native-paper'
 
 const generationNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    marginTop: 25,
     borderWidth: 8,
     borderColor: 'rgb(183, 233, 166)'
   },

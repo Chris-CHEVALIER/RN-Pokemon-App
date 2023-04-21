@@ -5,19 +5,31 @@ import {
   ImageBackground,
   ToastAndroid,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  ScrollView,
+  FlatList
 } from 'react-native'
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { getStyleType, typeImages } from '../pokemonUtils'
 import PokemonTeams from './PokemonTeams'
 import { Modal } from 'react-native-paper'
-import { updateTeam } from '../Fire'
+import { getTeams, updateTeam } from '../Fire'
+import { useEffect } from 'react'
+import TeamCard from '../components/TeamCard'
 
 export default function PokemonDetails ({ navigation, route }) {
   const [modalVisible, setModalVisible] = useState(false)
   const { pokemon, team } = route.params
   const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemon.id}`
+
+  const [teams, setTeams] = useState([])
+
+  useEffect(() => {
+    getTeams(teams => {
+      setTeams(teams)
+    })
+  }, [])
 
   function addPokemonToTeam (team) {
     if (
@@ -111,9 +123,23 @@ export default function PokemonDetails ({ navigation, route }) {
         visible={modalVisible}
         onDismiss={() => setModalVisible(!modalVisible)}
         contentContainerStyle={styles.modal}
-        
       >
-        <PokemonTeams onClose={() => setModalVisible(false)} onPress={team => addPokemonToTeam(team)} />
+        <>
+          <FlatList
+            data={teams}
+            renderItem={({ item }) => (
+              <TeamCard
+                onPress={() => {
+                  onPress
+                    ? addPokemonToTeam(item)
+                    : navigation.navigate('TeamDetails', { team: item })
+                }}
+                team={item}
+              />
+            )}
+            keyExtractor={item => item.id}
+          />
+        </>
       </Modal>
     </ImageBackground>
   )
@@ -166,7 +192,7 @@ const styles = StyleSheet.create({
   },
   addButtonContainer: {
     position: 'absolute',
-    bottom: 70,
+    bottom: 110,
     backgroundColor: 'rgb(65,133,148)',
     borderRadius: 100,
     width: 45,

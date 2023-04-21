@@ -4,7 +4,8 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getTeams } from '../Fire'
@@ -13,33 +14,39 @@ import { LinearGradient } from 'expo-linear-gradient'
 
 export default function PokemonTeams ({ navigation, onPress, onClose }) {
   const [teams, setTeams] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     getTeams(teams => {
       setTeams(teams)
+      setLoading(false)
     })
   }, [])
 
   return (
-    <View>
+    <View style={styles.container}>
       <LinearGradient
         colors={['rgb(245,245,245)', 'rgb(241, 254, 237)']}
         style={styles.background}
       />
-      <FlatList
-        data={teams}
-        renderItem={({ item }) => (
-          <TeamCard
-            onPress={() => {
-              onPress
-                ? onPress(item)
-                : navigation.navigate('TeamDetails', { team: item })
-            }}
-            team={item}
-          />
-        )}
-        keyExtractor={item => item.id}
-      />
+      {loading ? (
+        <ActivityIndicator size={25} />
+      ) : (
+        <FlatList
+          data={teams}
+          renderItem={({ item }) => (
+            <TeamCard
+              onPress={() => {
+                onPress
+                  ? onPress(item)
+                  : navigation.navigate('TeamDetails', { team: item })
+              }}
+              team={item}
+            />
+          )}
+          keyExtractor={item => item.id}
+        />
+      )}
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
           onPress={() => (onClose ? onClose() : {})}
@@ -55,6 +62,9 @@ export default function PokemonTeams ({ navigation, onPress, onClose }) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   background: {
     position: 'absolute',
     left: 0,
@@ -63,8 +73,8 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height
   },
   addButtonContainer: {
-    /* position: 'fixed', */
-    bottom: 30,
+    position: 'absolute',
+    bottom: 20,
     backgroundColor: 'rgb(65,133,148)',
     borderRadius: 100,
     width: 45,

@@ -1,6 +1,16 @@
-import { View, FlatList, StyleSheet, Text, Dimensions } from 'react-native'
+import {
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  Dimensions,
+  ImageBackground,
+  ActivityIndicator
+} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PokemonCard from '../components/PokemonCard'
+import { LinearGradient } from 'expo-linear-gradient'
+import { getStyleType } from '../pokemonUtils'
 
 export default function TeamDetails ({ navigation, route }) {
   const { team } = route.params
@@ -16,40 +26,62 @@ export default function TeamDetails ({ navigation, route }) {
   }, [team])
 
   return (
-    <View>
-      <Text style={styles.teamName}>{team.name}</Text>
-      <FlatList
-        data={pokemons}
-        renderItem={({ item }) => (
-          <PokemonCard
-            onPress={() =>
-              navigation.push('PokemonDetails', {
-                pokemon: item,
-                team: team
-              })
-            }
-            pokemonDetails={item}
+    <>
+      {pokemons.length <= 0 ? (
+        <ActivityIndicator />
+      ) : (
+        <View style={styles.container}>
+          <LinearGradient
+            colors={['rgb(245,245,245)', 'rgb(241, 254, 237)']}
+            style={styles.background}
           />
-        )}
-        keyExtractor={item => item.id}
-        numColumns={3}
-        style={styles.pokemonContainer}
-        columnWrapperStyle={styles.listWrapper}
-        contentContainerStyle={styles.pokemonList}
-      />
-      <Text style={styles.trainerName}>{team.trainer}</Text>
-    </View>
+          <Text
+            style={[
+              styles.teamName,
+              pokemons.length > 0
+                ? {
+                    color: getStyleType(pokemons[0].types[0].type.name)
+                      .backgroundColor
+                  }
+                : {}
+            ]}
+          >
+            {team.name}
+          </Text>
+          <FlatList
+            data={pokemons}
+            renderItem={({ item }) => (
+              <PokemonCard
+                onPress={() =>
+                  navigation.push('PokemonDetails', {
+                    pokemon: item,
+                    team: team
+                  })
+                }
+                pokemonDetails={item}
+              />
+            )}
+            keyExtractor={item => item.id}
+            numColumns={3}
+            style={styles.pokemonContainer}
+            columnWrapperStyle={styles.listWrapper}
+            contentContainerStyle={styles.pokemonList}
+          />
+          <Text style={styles.trainerName}>{team.trainer}</Text>
+        </View>
+      )}
+    </>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  image: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    width: '100%',
-    borderWidth: 8,
-    borderColor: 'rgb(183, 233, 166)'
+    alignItems: 'center',
+    paddingTop: 25
+  },
+  container: {
+    alignItems: 'center'
   },
   background: {
     position: 'absolute',
@@ -65,6 +97,7 @@ const styles = StyleSheet.create({
   teamName: {
     fontSize: 26,
     marginTop: 5,
+    fontWeight: 'bold',
     textAlign: 'center',
     textTransform: 'capitalize'
   },

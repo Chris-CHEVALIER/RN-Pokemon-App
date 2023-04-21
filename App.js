@@ -5,13 +5,14 @@ import PokemonTeams from './pages/PokemonTeams'
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeStackScreen from './pages/HomeStackScreen'
-import { Image } from 'react-native'
+import { Image, StatusBar } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
 export default function App () {
   return (
     <NavigationContainer>
+      <StatusBar hidden={true} />
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
