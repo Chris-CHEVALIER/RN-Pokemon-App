@@ -98,5 +98,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 4,
     color: 'rgb(162,231,195)'
-  }
+  },
 })

@@ -3,15 +3,15 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Dimensions,
   TouchableOpacity
 } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { LinearGradient } from 'expo-linear-gradient'
+import { addTeam } from '../Fire'
 
-export default function TeamForm () {
+export default function TeamForm ({ navigation }) {
   const {
     control,
     handleSubmit,
@@ -19,16 +19,22 @@ export default function TeamForm () {
   } = useForm()
 
   const onSubmit = data => {
-    console.log(data)
+    addTeam({
+      name: data.teamName,
+      trainer: data.trainerName,
+      pokemons: []
+    })
+    console.log('TEST')
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <LinearGradient
-        colors={['rgb(245,245,245)', 'rgb(241, 254, 237)']}
+        colors={['rgb(104, 179, 135)', 'rgb(55, 98, 118)']}
         style={styles.background}
       />
-      <View>
+      <Text style={styles.formTitle}>Équipe Pokémon</Text>
+      <View style={styles.inputContainer}>
         <Controller
           control={control}
           name='teamName'
@@ -36,12 +42,13 @@ export default function TeamForm () {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <>
-              <Text style={styles.label}>Nom de l'équipe</Text>
+              {/* <Text style={styles.label}>Nom de l'équipe</Text> */}
               <TextInput
                 onChangeText={onChange}
                 value={value}
-                placeholder="Entrez le nom de l'équipe"
-                styles={styles.input}
+                placeholder="Saisissez le nom de l'équipe"
+                placeholderTextColor='rgb(162,231,195)'
+                style={styles.input}
               />
               {errors.teamName && (
                 <Text style={styles.textError}>Ce champ est requis</Text>
@@ -51,7 +58,7 @@ export default function TeamForm () {
         />
       </View>
 
-      <View>
+      <View style={styles.inputContainer}>
         <Controller
           control={control}
           name='trainerName'
@@ -59,11 +66,12 @@ export default function TeamForm () {
           rules={{ required: true }}
           render={({ field: { onChange, value } }) => (
             <>
-              <Text style={styles.label}>Nom du dresseur</Text>
+              {/* <Text style={styles.label}>Nom du dresseur</Text> */}
               <TextInput
                 onChangeText={onChange}
                 value={value}
-                placeholder='Entrez le nom du dresseur'
+                placeholder='Saisissez le nom du dresseur'
+                placeholderTextColor='rgb(162,231,195)'
                 style={styles.input}
               />
               {errors.trainerName && (
@@ -74,17 +82,46 @@ export default function TeamForm () {
         />
       </View>
 
-      <TouchableOpacity
-        onPress={handleSubmit(onSubmit)}
-        style={styles.submitButton}
-      >
-        <Text>Créer l'équipe</Text>
+      {/* <View style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('PokemonTeams')}
+          style={[styles.iconButtonContainer, styles.addButtonContainer]}
+        >
+          <View style={styles.closeButton}>
+            <Text style={styles.crossIcon}>+</Text>
+          </View>
+        </TouchableOpacity>
+      </View> */}
+
+      <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+        <LinearGradient
+          colors={['rgb(174, 217, 156)', 'rgb(98, 201, 172)']}
+          style={styles.submitButton}
+        >
+          <Text style={styles.submitButtonText}>Créer</Text>
+        </LinearGradient>
       </TouchableOpacity>
+
+      <View style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('PokemonTeams')}
+          style={[styles.iconButtonContainer, styles.closeButtonContainer]}
+        >
+          <View style={styles.closeButton}>
+            <Text style={styles.crossIcon}>X</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   background: {
     position: 'absolute',
     left: 0,
@@ -92,10 +129,76 @@ const styles = StyleSheet.create({
     top: 0,
     height: Dimensions.get('window').height
   },
-  label: {},
-  input: {},
+  formTitle: {
+    color: '#414141',
+    fontWeight: 'bold',
+    fontSize: 20,
+    marginBottom: 10
+  },
+  inputContainer: {
+    width: '90%',
+    margin: 18
+  },
+  label: {
+    fontWeight: 'bold',
+    fontSize: 20,
+    color: '#414141'
+  },
+  input: {
+    borderColor: 'rgb(162,231,195)',
+    borderWidth: 3,
+    borderRadius: 100,
+    backgroundColor: 'white',
+    fontSize: 18,
+    color: 'rgb(162,231,195)',
+    textAlign: 'center',
+    height: 45
+  },
   textError: {
-    color: 'red',
-    textAlign: 'center'
+    color: '#414141',
+    textAlign: 'right',
+    marginTop: 5
+  },
+  submitButton: {
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    borderRadius: 100
+  },
+  submitButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  iconButtonContainer: {
+    backgroundColor: 'rgb(65,133,148)',
+    borderRadius: 100,
+    width: 45,
+    height: 45,
+    margin: 'auto',
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  addButtonContainer: {
+    marginBottom: 10
+  },
+  closeButtonContainer: {
+    position: 'absolute',
+    top: 145,
+    margin: 'auto'
+  },
+  closeButton: {
+    alignItems: 'center',
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: 'rgb(162,231,195)'
+  },
+  crossIcon: {
+    fontSize: 25,
+    marginBottom: 4,
+    color: 'rgb(162,231,195)'
   }
 })

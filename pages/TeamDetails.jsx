@@ -5,7 +5,8 @@ import {
   Text,
   Dimensions,
   ImageBackground,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PokemonCard from '../components/PokemonCard'
@@ -15,6 +16,7 @@ import { getStyleType } from '../pokemonUtils'
 export default function TeamDetails ({ navigation, route }) {
   const { team } = route.params
   const [pokemons, setPokemons] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const promises = team.pokemons.map(pokemonUrl =>
@@ -22,12 +24,13 @@ export default function TeamDetails ({ navigation, route }) {
     )
     Promise.all(promises).then(pokemonDetails => {
       setPokemons(pokemonDetails)
+      setLoading(false)
     })
   }, [team])
 
   return (
     <>
-      {pokemons.length <= 0 ? (
+      {loading ? (
         <ActivityIndicator />
       ) : (
         <View style={styles.container}>
@@ -35,19 +38,21 @@ export default function TeamDetails ({ navigation, route }) {
             colors={['rgb(245,245,245)', 'rgb(241, 254, 237)']}
             style={styles.background}
           />
-          <Text
-            style={[
-              styles.teamName,
-              pokemons.length > 0
-                ? {
-                    color: getStyleType(pokemons[0].types[0].type.name)
-                      .backgroundColor
-                  }
-                : {}
-            ]}
-          >
-            {team.name}
-          </Text>
+          <View>
+            <Text
+              style={[
+                styles.teamName,
+                pokemons.length > 0
+                  ? {
+                      color: getStyleType(pokemons[0].types[0].type.name)
+                        .backgroundColor
+                    }
+                  : {}
+              ]}
+            >
+              {team.name}
+            </Text>
+          </View>
           <FlatList
             data={pokemons}
             renderItem={({ item }) => (
@@ -67,7 +72,19 @@ export default function TeamDetails ({ navigation, route }) {
             columnWrapperStyle={styles.listWrapper}
             contentContainerStyle={styles.pokemonList}
           />
-          <Text style={styles.trainerName}>{team.trainer}</Text>
+          <View>
+            <Text style={styles.trainerName}>{team.trainer}</Text>
+          </View>
+          <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('PokemonTeams')}
+              style={styles.closeButtonContainer}
+            >
+              <View style={styles.closeButton}>
+                <Text style={styles.crossIcon}>X</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
     </>
@@ -109,6 +126,33 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center',
     fontWeight: 'bold',
+    color: 'rgb(162,231,195)'
+  },
+  closeButtonContainer: {
+    backgroundColor: 'rgb(65,133,148)',
+    borderRadius: 100,
+    width: 45,
+    height: 45,
+    margin: 'auto',
+    marginBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: 220,
+    margin: 'auto'
+  },
+  closeButton: {
+    alignItems: 'center',
+    width: 35,
+    height: 35,
+    justifyContent: 'center',
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: 'rgb(162,231,195)'
+  },
+  crossIcon: {
+    fontSize: 25,
+    marginBottom: 4,
     color: 'rgb(162,231,195)'
   }
 })

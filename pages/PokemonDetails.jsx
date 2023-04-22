@@ -130,9 +130,8 @@ export default function PokemonDetails ({ navigation, route }) {
             renderItem={({ item }) => (
               <TeamCard
                 onPress={() => {
-                  onPress
-                    ? addPokemonToTeam(item)
-                    : navigation.navigate('TeamDetails', { team: item })
+                  addPokemonToTeam(item)
+                  /* navigation.navigate('TeamDetails', { team: item }) */
                 }}
                 team={item}
               />

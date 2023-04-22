@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   sprite: {
     width: '45%',
-    right: '70%',
+    right: 60,
     height: 90,
     resizeMode: 'cover'
   },
