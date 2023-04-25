@@ -4,14 +4,13 @@ import {
   StyleSheet,
   Text,
   Dimensions,
-  ImageBackground,
-  ActivityIndicator,
   TouchableOpacity
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import PokemonCard from '../components/PokemonCard'
 import { LinearGradient } from 'expo-linear-gradient'
 import { getStyleType } from '../pokemonUtils'
+import LoadingIndicator from '../components/LoadingIndicator'
 
 export default function TeamDetails ({ navigation, route }) {
   const { team } = route.params
@@ -31,7 +30,7 @@ export default function TeamDetails ({ navigation, route }) {
   return (
     <>
       {loading ? (
-        <ActivityIndicator />
+        <LoadingIndicator />
       ) : (
         <View style={styles.container}>
           <LinearGradient
@@ -77,7 +76,7 @@ export default function TeamDetails ({ navigation, route }) {
           </View>
           <View style={{ alignItems: 'center' }}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('PokemonTeams')}
+              onPress={() => navigation.navigate('TeamList')}
               style={styles.closeButtonContainer}
             >
               <View style={styles.closeButton}>

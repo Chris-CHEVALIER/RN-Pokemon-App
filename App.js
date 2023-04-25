@@ -1,13 +1,17 @@
-// My pages
-import PokemonTeams from './pages/PokemonTeams'
+// Core components
+import { Image, StatusBar, StyleSheet } from 'react-native'
+
+// Pages
+import HomeStackScreen from './pages/HomeStackScreen'
+import TeamList from './pages/TeamList'
 
 // Navigation
 import { NavigationContainer } from '@react-navigation/native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import HomeStackScreen from './pages/HomeStackScreen'
-import { Image, StatusBar } from 'react-native'
-
 const Tab = createBottomTabNavigator()
+
+// Color theme
+import { theme } from './styles/theme'
 
 export default function App () {
   return (
@@ -16,8 +20,9 @@ export default function App () {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarLabelStyle: { fontSize: 12, fontWeight: 'bold' },
-          tabBarStyle: { marginBottom: 5 }
+          tabBarLabelStyle: styles.tabLabel,
+          tabBarActiveTintColor: theme.primary,
+          tabBarInactiveTintColor: theme.text
         }}
       >
         <Tab.Screen
@@ -27,20 +32,20 @@ export default function App () {
             tabBarIcon: () => (
               <Image
                 source={require('./assets/pokemon-icon.png')}
-                style={{ width: 30, height: 30 }}
+                style={styles.tabIcon}
               />
             ),
             tabBarLabel: 'Pokémons'
           }}
         />
         <Tab.Screen
-          name='PokemonTeams'
-          component={PokemonTeams}
+          name='TeamList'
+          component={TeamList}
           options={{
             tabBarIcon: () => (
               <Image
                 source={require('./assets/team-icon.png')}
-                style={{ width: 30, height: 30 }}
+                style={styles.tabIcon}
               />
             ),
             tabBarLabel: 'Équipes'
@@ -50,3 +55,14 @@ export default function App () {
     </NavigationContainer>
   )
 }
+
+const styles = StyleSheet.create({
+  tabLabel: {
+    fontSize: 12,
+    fontWeight: 'bold'
+  },
+  tabIcon: {
+    width: 30,
+    height: 30
+  }
+})

@@ -24,7 +24,6 @@ export default function TeamForm ({ navigation }) {
       trainer: data.trainerName,
       pokemons: []
     })
-    console.log('TEST')
   }
 
   return (
@@ -84,7 +83,7 @@ export default function TeamForm ({ navigation }) {
 
       {/* <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('PokemonTeams')}
+          onPress={() => navigation.navigate('TeamList')}
           style={[styles.iconButtonContainer, styles.addButtonContainer]}
         >
           <View style={styles.closeButton}>
@@ -104,7 +103,7 @@ export default function TeamForm ({ navigation }) {
 
       <View style={{ alignItems: 'center' }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('PokemonTeams')}
+          onPress={() => navigation.navigate('TeamList')}
           style={[styles.iconButtonContainer, styles.closeButtonContainer]}
         >
           <View style={styles.closeButton}>

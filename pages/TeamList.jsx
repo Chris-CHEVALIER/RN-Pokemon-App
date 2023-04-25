@@ -4,15 +4,15 @@ import {
   View,
   Text,
   Dimensions,
-  TouchableOpacity,
-  ActivityIndicator
+  TouchableOpacity
 } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { getTeams } from '../Fire'
 import TeamCard from '../components/TeamCard'
 import { LinearGradient } from 'expo-linear-gradient'
+import LoadingIndicator from '../components/LoadingIndicator'
 
-export default function PokemonTeams ({ navigation, onPress, onClose }) {
+export default function TeamList ({ navigation, onPress, onClose }) {
   const [teams, setTeams] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -30,7 +30,7 @@ export default function PokemonTeams ({ navigation, onPress, onClose }) {
         style={styles.background}
       />
       {loading ? (
-        <ActivityIndicator size={25} />
+        <LoadingIndicator />
       ) : (
         <FlatList
           data={teams}
@@ -98,5 +98,5 @@ const styles = StyleSheet.create({
     fontSize: 25,
     marginBottom: 4,
     color: 'rgb(162,231,195)'
-  },
+  }
 })

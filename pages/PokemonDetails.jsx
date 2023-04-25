@@ -12,7 +12,7 @@ import {
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { getStyleType, typeImages } from '../pokemonUtils'
-import PokemonTeams from './PokemonTeams'
+import TeamList from './TeamList'
 import { Modal } from 'react-native-paper'
 import { getTeams, updateTeam } from '../Fire'
 import { useEffect } from 'react'
